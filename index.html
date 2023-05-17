@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css"
+      integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <h1>Q1.Event bubbling or stop propagation</h1>
+    <p>Ans:</p>
+    <ul>
+      <li>
+        In the JavaScript, Event Flow process is completed by three concepts :
+        <ol>
+          <li>Event Capturing.</li>
+          <li>Event Target.</li>
+          <li>Event Bubbling.</li>
+        </ol>
+      </li>
+      <li>
+        Event Bubbling is the process where event starts from the deepest
+        element or target element to its parents, then all its ancestors which
+        are on the way to bottom to top.
+      </li>
+    </ul>
+    <div id="eventBubblingDiv">
+      <button id="btn1">Click for Event bubbling</button>
+    </div>
+    <p>Code explaination:</p>
+    <ul type="square">
+      <li>
+        In above code, In the HTML,I create a div with id eventBubblingDiv. and
+        its nested button element with id btn1.
+      </li>
+      <li>
+        In js code, assign the html element to varialble and add click event on
+        div and button, both of function just print the strings value on the
+        console.
+      </li>
+      <li>
+        When we click on the button first run the function which is attached on
+        button ("child button clicked"), after that function of div runs
+        ("parent div clicked"). This is due to <strong>Event bubbling</strong>.
+        First run the event which is attached with event target then its parents
+        on the way to window object.
+      </li>
+      <li>
+        When we click on the button the event flow as :
+        <ol>
+          <li>button tag</li>
+          <li>div tag</li>
+          <li>body tag</li>
+          <li>html tag</li>
+          <li>Document</li>
+        </ol>
+      </li>
+    </ul>
+    <ul>
+      <li>
+        If we want to stop the event flow from event target to top element in
+        DOM,<strong>event.stopPropagation()</strong> method stops the event to
+        travel to the bottom to top.
+      </li>
+      <li>
+        Below the code is by using stopPropagation method same as above only one
+        change makes in button tag i.e event.stopPropagation() with button to
+        stop the travel of onclick event from bottom to top.
+      </li>
+      <li>
+        Due to this when we click on button console prints only “child button
+        clicked”. Event not pass from event target to document of webpage.
+      </li>
+    </ul>
+
+    <div id="stopProp">
+      <button id="btn2" onclick="event.stopPropagation()">
+        Click for stopPropagation
+      </button>
+    </div>
+    <hr />
+    <hr />
+    <h1>Q2.what is nullish coalescing operator</h1>
+    <ul>
+      <li>
+        Defination:
+        <br />
+        The nullish coalescing (??) operator is a logical operator that returns
+        its right-hand side operand when its left-hand side operand is null or
+        undefined, and otherwise returns its left-hand side operand.
+      </li>
+      <li>
+        Syntax:
+        <br />
+        leftExpr ?? rightExpr
+      </li>
+      <li>
+        Example code:
+        <br />
+        <pre>
+                    const demo = null ?? 'right hand side expression';
+                    console.log(demo)//'right hand side expression'
+                </pre
+        >
+      </li>
+      <li>
+        In above code LHS has null value hence console.log(demo) prints the RHS
+        i.e "right hand side expression"
+      </li>
+
+      <li>
+        If LHS not falsy its left-hand side operand
+        <pre>
+                    const demo2 = 40 ?? 'right hand side expression';
+                    console.log(demo2)//40
+                </pre
+        >
+      </li>
+      <li>
+        In above code LHS has 40 value hence console.log(demo2) prints the lHS
+        i.e 40
+      </li>
+    </ul>
+    <h1>Q3.What are function generators? Why do we use it?</h1>
+    <ul>
+      <li>
+        Defination:
+        <br />
+        The function* declaration (function keyword followed by an asterisk)
+        defines a generator function, which returns a Generator object.
+      </li>
+      <li>
+        The generator object returned by the generator function follows the
+        Iterable, so it works similarly to iterators.
+      </li>
+      <li>
+        Syntax:
+        <br />
+        <pre>
+                generator function:
+                function* functionName{
+                    // Definition
+            
+                    // Generally, yield Statements 
+                    // Are written here 
+                }
+            </pre
+        >
+      </li>
+      <li>
+        next():
+        <br />
+        Calling the next() method on the generator object only executes the
+        function till the first yield statement and the yield value is returned
+        to the caller. When we repeatedly call the next() method, we can access
+        a sequence of the objects
+      </li>
+      <li>
+        yield:
+        <br />
+        The yield keyword is used inside the generator to pause and resume the
+        execution. Further, the state of function is retained so that execution
+        can be resumed from the last yield statement.
+      </li>
+      <li>
+        Example code:
+        <br />
+        <pre>
+                function* printNums() {
+                    let number = 1;
+                    while (number < =10) {
+                      yield number++;
+                    }
+                  }
+                  
+                  const generator = printNums();
+                  console.log(generator.next());// {value: 1, done: false}
+                  console.log(generator.next());// {value: 2, done: false}
+                  console.log(generator.next());// {value: 3, done: false}
+            </pre
+        >
+      </li>
+      <li>
+        Use:
+        <ol>
+          <li>
+            Memory Efficient: Because they work on running only when need model,
+            means the value will be evaluated on each next() method call.
+          </li>
+          <li>
+            Lazy Evaluation: This technique improves the performance by just
+            evaluating the expression whenever needed without evaluating the
+            entire required data.
+          </li>
+        </ol>
+      </li>
+    </ul>
+
+    <h1>Q4.Fetch Api and render it in the screen in a table format</h1>
+
+    <table class="table" border="1px">
+      <thead></thead>
+      <tbody></tbody>
+    </table>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
